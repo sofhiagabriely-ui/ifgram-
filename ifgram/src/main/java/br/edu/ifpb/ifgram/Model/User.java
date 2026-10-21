@@ -1,4 +1,5 @@
-package br.edu.ifpb.ifgram.model;
+package br.edu.ifpb.ifgram.Model;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
-@Entity 
+@Entity
 @Table(name = "tb_user")
 public class User {
 
@@ -40,5 +41,12 @@ public class User {
     public String getEmail(){
         return this.email;
     }
-
+    public void setNome (String nome) {
+        this.nome = nome;
+    }
+    public void setEmail (String email) {
+        this.email = email;
+    }
 }
+
+
