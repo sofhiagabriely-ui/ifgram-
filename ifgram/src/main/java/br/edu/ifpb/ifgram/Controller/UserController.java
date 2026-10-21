@@ -37,6 +37,9 @@ import org.springframework.web.bind.annotation.*;
             return service.atualizarUsuario(request);
         }
         @DeleteMapping
-    public void deleteUser( UserRequest request) throws Exception
+        public String deleteUser(UserRequest request) throws Exception{
+            service.deletarUsuario(request);
+            return "Usuário deletado com sucesso!";
+        }
     }
 

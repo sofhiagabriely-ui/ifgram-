@@ -3,6 +3,7 @@ package br.edu.ifpb.ifgram.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.aspectj.weaver.bcel.ExceptionRange;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,24 @@ import br.edu.ifpb.ifgram.Repository.UserRepository;
             return listaUsuariosResponse;
         }
 
-        public UserResponse atualizarUsuario(UserRequest request) throws
+        public UserResponse atualizarUsuario(UserRequest request) throws Exception {
+            Optional<User> usuario = repository.findByEmail(request.email());
+            if(usuario.isEmpty()){
+                throw new Exception("usuário não existe na base de dados.");
+            }
+            User usuarioSalvo = usuario.get();
+            usuarioSalvo.setNome(request.nome());
+            repository.save(usuarioSalvo);
+
+            return UserResponse.from(usuarioSalvo);
+        }
+        public void  deletarUsuario(UserRequest request) throws Exception {
+            Optional<User> usuario = repository.findByEmail(request.email());
+            if (usuario.isEmpty()) {
+                throw new Exception("usuário não encontrado.");
+            }
+            User usuarioDeletar = usuario.get();
+            repository.delete(usuarioDeletar);
         }
     }
 
