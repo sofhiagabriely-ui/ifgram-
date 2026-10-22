@@ -3,6 +3,7 @@ package br.edu.ifpb.ifgram.DTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
     public record UserRequest(
             @Email
@@ -15,4 +16,4 @@ import jakarta.validation.constraints.Size;
             @Size(min=4)
             @NotNull
             String senha
-    ) {}
+    ) { }
