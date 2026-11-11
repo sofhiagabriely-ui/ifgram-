@@ -1,19 +1,10 @@
 package br.edu.ifpb.ifgram.Repository;
 
-import br.edu.ifpb.ifgram.Model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+ public interface UserRepository extends JpaRepository<User, Long>{
 
-import java.util.List;
-import java.util.Optional;
+    boolean existsByEmail(String email);
+    Optional<User> findByEmail(String email);
+    List<User> findByNomeContainingIgnoreCase(String trecho);
 
-    public interface UserRepository extends JpaRepository<User, Long> {
-
-        boolean existsByEmail(String email);
-        Optional<User> findByEmail(String email);
-        List<User> findByNomeContainingIgnoreCase(String trecho);
-
-        @Query("select u from User u where u.email like concat('%', :dominio)")
-        List<User> doDominio(String dominio);
-
-    }
+    @Query("select u from User u where u.email like concat('%', :dominio)")
+    List<User> doDominio(String dominio);
